@@ -1,0 +1,17 @@
+{
+  "name": "purescript-ffi-simple",
+  "version": "0.1.0",
+  "description": "We're sure you have your reasons",
+  "scripts": {
+    "install-ps": "psc-package install",
+    "test": "pulp test"
+  },
+  "author": "James Laver",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "psc-package": "^3.0.1",
+    "pulp": "^12.4.0",
+    "purescript": "^0.12.5"
+  },
+  "dependencies": {}
+}

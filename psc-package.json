@@ -1,0 +1,11 @@
+{
+  "name": "ffi-simple",
+  "set": "master",
+  "source": "https://github.com/purescript/package-sets", 
+  "depends":
+    [ "functions"
+    , "nullable"
+    , "prelude"
+    , "spec"
+    , "psci-support" ]
+}
