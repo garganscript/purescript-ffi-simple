@@ -1,19 +1,19 @@
 -- | Utilities for dealing with (uncurried) functions
--- | Note: If you need `Effect` to model failure, use `pure` (ha!)
 module FFI.Simple.Functions
-  ( bind', apply, call
-  , (...), applyMethod, applyMethod', callMethod
+  ( bind', apply, delay
+  , (...), applyMethod, applyMethod'
   , args1, args2, args3, args4, args5
   , args6, args7, args8, args9, args10
   ) where
 
-import Prelude ( flip )
+import Prelude ( Unit, ($), unit, flip, pure )
 import FFI.Simple.Objects ( getProperty )
 import FFI.Simple.PseudoArray ( PseudoArray )
 import Data.Function.Uncurried
   ( Fn2, runFn2, Fn3, runFn3, Fn4,  runFn4
   , Fn5, runFn5, Fn6, runFn6, Fn7,  runFn7
   , Fn8, runFn8, Fn9, runFn9, Fn10, runFn10 )
+import Effect ( Effect )
 
 bind' :: forall f o. f -> o -> f
 bind' = runFn2 _bind
@@ -24,30 +24,25 @@ foreign import _bind :: forall f o. Fn2 f o f
 apply :: forall f this a b. f -> this -> a -> b
 apply = runFn3 _apply
 
--- | Apply a function to an array of zero argumemts
-call :: forall f this a. f -> this -> a
-call f o = apply f o []
-
 foreign import _apply :: forall f o a b. Fn3 f o a b
 
 -- TODO: figure out what i should be
-infixr 4 applyMethod' as ...
+infixl 4 applyMethod' as ...
 
 -- | Lookup and apply the method with the given name on the given
 -- | object to the given this and an array or pseudoarray of arguments
 applyMethod :: forall o a b. String -> o -> a -> b
 applyMethod n o = apply (getProperty n o) o
 
+-- | flip applyMethod
 applyMethod' :: forall o a b. o -> String -> a -> b
 applyMethod' = flip applyMethod
 
--- | Lookup and apply the method with the given name on the given
--- | object to the given this and an empty array of arguments
-callMethod :: forall o a. String -> o -> a
-callMethod n o = applyMethod n o []
+-- | Gives you back an `Effect a` with delayed computation
+delay :: forall a. (Unit -> Effect a) -> Effect a
+delay f = runFn2 _delay unit f
 
-callMethod' :: forall o a. o -> String -> a
-callMethod' o n = applyMethod n o []
+foreign import _delay :: forall a b. Fn2 a (a -> Effect b) (Effect b)
 
 -- | returns an argument as a PseudoArray
 args1 :: forall a. a -> PseudoArray

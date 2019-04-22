@@ -11,7 +11,7 @@ typeof = _typeof
 foreign import _typeof :: forall a. a -> String
 
 -- TODO: figure out what i should be
-infixr 4 getProperty' as ..
+infixl 4 getProperty' as ..
 
 -- | Get the property with the given name form the given object
 getProperty :: forall o v. String -> o -> v

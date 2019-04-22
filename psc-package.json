@@ -4,8 +4,10 @@
   "source": "https://github.com/purescript/package-sets", 
   "depends":
     [ "functions"
+    , "effect"
     , "nullable"
     , "prelude"
+    , "refs"
     , "spec"
     , "psci-support" ]
 }
