@@ -39,3 +39,9 @@ pseudoArraySpec = describe "PseudoArray" $ do
     (slice 0 2 (args2 1 2) :: Array Int) `shouldEqual` [1,2]
     (slice 0 1 (args2 1 2) :: Array Int) `shouldEqual` [1]
     (slice 1 2 (args2 1 2) :: Array Int) `shouldEqual` [2]
+  it "unshift" $ do
+    let x = unshift 1 [2]
+    let y = unshift "a" [1]
+    x `shouldEqual` [1,2]
+    length y `shouldEqual` 2
+
