@@ -14,12 +14,12 @@ import FFI.Simple.Functions
 
 functionsSpec :: Spec Unit
 functionsSpec = describe "Functions" $ do
-  it "bind'" $ do
-    (bind' val {val: 123}) unit `shouldEqual` 123
-  it "apply" $ do
-    apply sum null [1,2] `shouldEqual` 3
-    apply summer {val:123} [1,2] `shouldEqual` 126
-    apply summer {val:1} [1,2] `shouldEqual` 4
+  it "bindTo" $ do
+    (bindTo val {val: 123}) unit `shouldEqual` 123
+  it "applyTo" $ do
+    applyTo sum null [1,2] `shouldEqual` 3
+    applyTo summer {val:123} [1,2] `shouldEqual` 126
+    applyTo summer {val:1} [1,2] `shouldEqual` 4
   it "applyMethod" $ do
     applyMethod "x" {val: 123, x:summer} [] `shouldEqual` 123
     applyMethod "x" {val: 123, x:summer} [1,2] `shouldEqual` 126
@@ -28,7 +28,7 @@ functionsSpec = describe "Functions" $ do
     ({val: 123, sum: summer} ... "sum" $ [1,2]) `shouldEqual` 126
   it "delay" $ do
     ref <- liftEffect $ Ref.new 0
-    let eff = delay $ \_ -> Ref.write 1 ref
+    let eff = delay unit $ \_ -> Ref.write 1 ref
     count <- liftEffect $ Ref.read ref
     count `shouldEqual` 0
     ret <- liftEffect eff

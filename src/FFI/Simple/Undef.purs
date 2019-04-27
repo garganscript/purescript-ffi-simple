@@ -5,7 +5,7 @@ module FFI.Simple.Undef
   ) where
 
 import Prelude ( (<<<), (==) )
-import FFI.Simple.Objects ( typeof )
+import FFI.Simple.Objects ( typeOf )
 import Data.Nullable ( Nullable, null )
 import Unsafe.Coerce ( unsafeCoerce )
 
@@ -17,7 +17,7 @@ undefined = _undefined
 foreign import _undefined :: Undefined
 
 isUndef :: forall a. a -> Boolean
-isUndef v = typeof v == "undefined"
+isUndef v = typeOf v == "undefined"
 
 -- Given a value which may quietly be undef (i.e. you are lying
 -- about the type), return the value, or a default if it is undef

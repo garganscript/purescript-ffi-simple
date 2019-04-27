@@ -31,6 +31,41 @@ createElement c p cs = applyTo react (args3 c p cs)
 
 > Send it a message -- Joe Armstrong (1950-2019)
 
+## Changelog
+
+### 0.2.0
+
+Breakages:
+
+* `F.S.Functions`:
+  * `bind'` -> `bindTo`
+  * `apply` -> `applyTo`
+  * `delay` now takes a value to provide
+* `F.S.Objects`:
+  * `typeof` -> `typeOf`
+
+New:
+
+* `F.S.Globals` (new module):
+  * `global` - look up a global by name
+* `F.S.Objects`:
+  * `instanceOf` - wrapper for js `instanceof`
+  * `(.=)` / `setProperty'` to set a property
+  * `(!=)` / `defineProperty'` to define a readonly property
+
+### 0.1.2
+
+* Remove `F.S.Require` as i can't figure out how to make a build work with it.
+* Remove `call`, `callMethod` and `callMethod'` from `F.S.Functions`
+* Add `F.S.Functions.delay`
+* Made dotty operators infixl
+* Depend on effect and refs
+
+### 0.1.1
+
+* Add `F.S.PseudoArray.unshift`
+
+
 ## Copyright and License
 
 Copyright (c) 2019 James Laver

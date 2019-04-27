@@ -1,6 +1,6 @@
 -- | Utilities for dealing with (uncurried) functions
 module FFI.Simple.Functions
-  ( bind', apply, delay
+  ( bindTo, applyTo, delay
   , (...), applyMethod, applyMethod'
   , args1, args2, args3, args4, args5
   , args6, args7, args8, args9, args10
@@ -15,14 +15,14 @@ import Data.Function.Uncurried
   , Fn8, runFn8, Fn9, runFn9, Fn10, runFn10 )
 import Effect ( Effect )
 
-bind' :: forall f o. f -> o -> f
-bind' = runFn2 _bind
+bindTo :: forall f o. f -> o -> f
+bindTo = runFn2 _bind
 
 foreign import _bind :: forall f o. Fn2 f o f
 
 -- | Apply a function to a this object with the given arguments
-apply :: forall f this a b. f -> this -> a -> b
-apply = runFn3 _apply
+applyTo :: forall f this a b. f -> this -> a -> b
+applyTo = runFn3 _apply
 
 foreign import _apply :: forall f o a b. Fn3 f o a b
 
@@ -32,15 +32,15 @@ infixl 4 applyMethod' as ...
 -- | Lookup and apply the method with the given name on the given
 -- | object to the given this and an array or pseudoarray of arguments
 applyMethod :: forall o a b. String -> o -> a -> b
-applyMethod n o = apply (getProperty n o) o
+applyMethod n o = applyTo (getProperty n o) o
 
 -- | flip applyMethod
 applyMethod' :: forall o a b. o -> String -> a -> b
 applyMethod' = flip applyMethod
 
 -- | Gives you back an `Effect a` with delayed computation
-delay :: forall a. (Unit -> Effect a) -> Effect a
-delay f = runFn2 _delay unit f
+delay :: forall a b. a -> (a -> Effect b) -> Effect b
+delay = runFn2 _delay
 
 foreign import _delay :: forall a b. Fn2 a (a -> Effect b) (Effect b)
 
