@@ -1,5 +1,5 @@
 module FFI.Simple.Objects
-  ( typeOf, instanceOf, named
+  ( typeOf, instanceOf,   named
   , (..), getProperty,    getProperty'
   , (.=), setProperty,    setProperty'
   , (!=), defineProperty, defineProperty'

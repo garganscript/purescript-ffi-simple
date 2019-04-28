@@ -1,23 +1,26 @@
 -- Utilities for handling unwanted undefs when you are lying about
 -- their existence in the types
 module FFI.Simple.Undef
-  ( Undefined, undefined, isUndef, defaultUndef, nullUndef
+  ( Undef, undef
+  , isUndef
+  , defaultUndef, nullUndef
   ) where
 
 import Prelude ( (<<<), (==) )
-import FFI.Simple.Objects ( typeOf )
 import Data.Nullable ( Nullable, null )
 import Unsafe.Coerce ( unsafeCoerce )
 
-foreign import data Undefined :: Type
+foreign import data Undef :: Type
 
-undefined :: Undefined
-undefined = _undefined
+undef :: Undef
+undef = _undef
 
-foreign import _undefined :: Undefined
+foreign import _undef :: Undef
 
 isUndef :: forall a. a -> Boolean
-isUndef v = typeOf v == "undefined"
+isUndef = _isUndef
+
+foreign import _isUndef :: forall a. a -> Boolean
 
 -- Given a value which may quietly be undef (i.e. you are lying
 -- about the type), return the value, or a default if it is undef

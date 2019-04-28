@@ -33,6 +33,19 @@ createElement c p cs = applyTo react (args3 c p cs)
 
 ## Changelog
 
+### 0.2.1
+
+Breakages:
+
+* `F.S.Undef`:
+  * `Undefined` -> `Undef`
+  * `undefined` -> `undef`
+
+New:
+
+* `F.S.Globals`:
+  * `unsafeGlobal` - Assume a global will be present
+
 ### 0.2.0
 
 Breakages:

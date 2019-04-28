@@ -18,4 +18,4 @@ import FFI.Simple.Objects
   , (!=), defineProperty, defineProperty'
   )
 
-import FFI.Simple.Globals ( global )
+import FFI.Simple.Globals ( global, unsafeGlobal )
