@@ -33,6 +33,16 @@ createElement c p cs = applyTo react (args3 c p cs)
 
 ## Changelog
 
+### 0.2.2
+
+Improvements:
+
+* `F.S.Globals`:
+  * Warns on module load if `window` is not defined
+  * If `window` is not defined:
+	* `global` will always return `Nothing`
+    * `unsafeGlobal` will always quietly return `undef`
+
 ### 0.2.1
 
 Breakages:
@@ -44,7 +54,8 @@ Breakages:
 New:
 
 * `F.S.Globals`:
-  * `unsafeGlobal` - Assume a global will be present
+  * `unsafeGlobal` - Assume a global will be present, quietly return
+    `undef` if it is not. (Bring your own safety!)
 
 ### 0.2.0
 
