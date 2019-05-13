@@ -12,10 +12,11 @@ import FFI.Simple.Functions
   , args6, args7, args8, args9, args10
   )
 import FFI.Simple.Objects
-  ( typeOf, instanceOf, named
-  , (..), getProperty,    getProperty'
-  , (.=), setProperty,    setProperty'
-  , (!=), defineProperty, defineProperty'
+  ( typeOf, instanceOf, named, isIn, hasOwnProperty
+  , (.?), maybeGetProperty, maybeGetProperty'
+  , (..), getProperty,      getProperty'
+  , (.=), setProperty,      setProperty'
+  , (!=), defineProperty,   defineProperty'
   )
 
 import FFI.Simple.Globals ( global, unsafeGlobal )

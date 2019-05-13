@@ -3,11 +3,12 @@
 module FFI.Simple.Undef
   ( Undef, undef
   , isUndef
-  , defaultUndef, nullUndef
+  , defaultUndef, nullUndef, maybeUndef
   ) where
 
 import Prelude ( (<<<), (==) )
-import Data.Nullable ( Nullable, null )
+import Data.Maybe ( Maybe )
+import Data.Nullable ( Nullable, null, toMaybe )
 import Unsafe.Coerce ( unsafeCoerce )
 
 foreign import data Undef :: Type
@@ -34,3 +35,5 @@ nullUndef = _nullUndef
 
 foreign import _nullUndef :: forall a. a -> Nullable a
 
+maybeUndef :: forall a. a -> Maybe a
+maybeUndef = toMaybe <<< nullUndef

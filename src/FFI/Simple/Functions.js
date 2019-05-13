@@ -18,3 +18,9 @@ exports._apply = function apply(f, that, args) { return f.apply(that, args); };
 exports._delay = function delay(a, f) {
   return function() { return f()(a); };
 };
+exports._new = function newer(obj, args) {
+  const args2 = args.slice();
+  args2.unshift(obj);
+  // We could obj.bind.apply(obj, args) but obj may have overwritten `.bind`
+  return new (Function.prototype.bind.apply(obj, args2));
+}

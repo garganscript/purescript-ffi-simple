@@ -1,19 +1,26 @@
 module FFI.Simple.Functions.Spec ( functionsSpec ) where
 
-import Prelude hiding ( apply )
-import Data.Array as A
-import Data.Maybe ( Maybe(..), isJust )
+import Prelude ( Unit, bind, discard, unit, (#), ($) )
 import Data.Nullable ( null )
 import Effect.Class ( liftEffect )
 import Effect.Ref as Ref
-import Test.Spec ( Spec, describe, it, pending )
+import Test.Spec ( Spec, describe, it )
 import Test.Spec.Assertions ( shouldEqual )
 
 import FFI.Simple.PseudoArray ( length )
 import FFI.Simple.Functions
+import FFI.Simple.Objects (instanceOf)
+
+foreign import data Object :: Type
+foreign import _object :: Object
+foreign import _string :: Object
 
 functionsSpec :: Spec Unit
 functionsSpec = describe "Functions" $ do
+  it "new" $ do -- why, you ask? because javascript.
+    "Hello" `instanceOf` _string # shouldEqual false
+    let s = new _string ["Hello"]
+    s `instanceOf` _string # shouldEqual true
   it "bindTo" $ do
     (bindTo val {val: 123}) unit `shouldEqual` 123
   it "applyTo" $ do

@@ -1,6 +1,6 @@
 -- | Utilities for dealing with (uncurried) functions
 module FFI.Simple.Functions
-  ( bindTo, applyTo, delay
+  ( new, bindTo, applyTo, delay
   , (...), applyMethod, applyMethod'
   , args1, args2, args3, args4, args5
   , args6, args7, args8, args9, args10
@@ -14,6 +14,12 @@ import Data.Function.Uncurried
   , Fn5, runFn5, Fn6, runFn6, Fn7,  runFn7
   , Fn8, runFn8, Fn9, runFn9, Fn10, runFn10 )
 import Effect ( Effect )
+
+-- | Call new on the function with an array or pseudoarray of arguments
+new :: forall f a o. f -> a -> o
+new = runFn2 _new
+
+foreign import _new :: forall f a o. Fn2 f a o
 
 bindTo :: forall f o. f -> o -> f
 bindTo = runFn2 _bind

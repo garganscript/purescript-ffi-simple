@@ -8,3 +8,5 @@ function summer() {
 exports.val = function() { return this.val; };
 exports.sum = sum;
 exports.summer = summer;
+exports._object = Object;
+exports._string = String;

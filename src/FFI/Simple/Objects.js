@@ -1,15 +1,22 @@
 'use strict';
 
-function getProperty(prop, obj) { return obj[prop]; };
-
-exports._typeof = function typeOf(v) { return typeof v; };
-exports._instanceof = function instanceOf(v, o) { return v instanceof o; };
-exports._getProperty = getProperty;
-exports._setProperty = function setProperty(prop, obj, value) {
+function typeOf(v) { return typeof v; }
+function instanceOf(obj, thing) { return obj instanceof thing; }
+function isIn(prop,obj) { return prop in obj; }
+function hasOwnProperty(prop, obj) { return obj.hasOwnProperty(prop); }
+function getProperty(prop, obj) { return obj[prop]; }
+function setProperty(prop, obj, value) {
   obj[prop] = value;
   return obj;
-};
-exports._defineProperty = function defineProperty(prop, obj, value) {
+}
+function defineProperty(prop, obj, value) {
   Object.defineProperty(obj, prop, {value: value, writable: false});
   return obj;
-};
+}
+exports._typeof = typeOf;
+exports._instanceof = instanceOf;
+exports._isIn = isIn;
+exports._hasOwnProperty = hasOwnProperty;
+exports._getProperty = getProperty;
+exports._setProperty = setProperty;
+exports._defineProperty = defineProperty;

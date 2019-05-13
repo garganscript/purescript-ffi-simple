@@ -33,6 +33,31 @@ createElement c p cs = applyTo react (args3 c p cs)
 
 ## Changelog
 
+### 0.2.3
+
+Improvements:
+
+* `F.S.Globals`:
+  * Made `global` check not just `window`, but also `globalThis`,
+    `global`, so supporting any environment. But nodejs is shit, so
+    it's basically useless in that environment.
+* Improved tests for existing functionality
+
+New:
+
+* `F.S.Functions`:
+  * `new`
+* `F.S.Objects`:
+  * Property checks:
+    * `hasOwnProperty` - non-inherited props
+    * `isIn` - possibly inherited props
+  * Safer Property access:
+    * `(.?)`
+	* `maybeGetProperty`
+	* `maybeGetProperty'`
+* `F.S.Undef`:
+  * `maybeUndef` - the `Maybe` analogue of `nullUndef`
+
 ### 0.2.2
 
 Improvements:
@@ -88,7 +113,6 @@ New:
 ### 0.1.1
 
 * Add `F.S.PseudoArray.unshift`
-
 
 ## Copyright and License
 
