@@ -1,9 +1,11 @@
 module FFI.Simple.Objects
-  ( typeOf, instanceOf, named, downcast, isIn, hasOwnProperty
+  ( typeOf, instanceOf, named, downcast, isIn
+  , keys, hasOwnProperty
   , (..), getProperty,    getProperty'
   , (.?), maybeGetProperty, maybeGetProperty'
   , (.=), setProperty,    setProperty'
   , (!=), defineProperty, defineProperty'
+  , (!-), removeProperty, removeProperty'
   ) where
 
 import Prelude ( flip, (<<<) )
@@ -31,11 +33,24 @@ foreign import _instanceof :: forall a b. Fn2 a b Boolean
 named :: forall o. String -> o -> o
 named n o = (o != "name") n
 
--- | Is the given property found on the given object or via inheritance/
+-- | Attempt to cast to a type given a constructor for it
+downcast :: forall ctor from to. ctor -> from -> Maybe to
+downcast ctor from =
+  if from `instanceOf` ctor
+  then Just (unsafeCoerce from)
+  else Nothing
+
+-- | Is the given property found on the given object or via inheritance?
 isIn :: forall a. String -> a -> Boolean
 isIn = runFn2 _isIn
 
 foreign import _isIn :: forall a b. Fn2 a b Boolean
+
+-- | Return a list of keys in the object
+keys :: forall a. a -> Array String
+keys = _keys
+
+foreign import _keys :: forall a. a -> Array String
 
 -- | Does this object have the given property itself (i.e. not inherited)?
 hasOwnProperty :: forall o. String -> o -> Boolean
@@ -73,7 +88,7 @@ getProperty' = flip getProperty
 setProperty :: forall o v. String -> o -> v -> o
 setProperty = runFn3 _setProperty
 
-infix 9 setProperty' as .=
+infixl 9 setProperty' as .=
 
 -- | flip setProperty
 setProperty' :: forall o v. o -> String -> v -> o
@@ -81,22 +96,24 @@ setProperty' = flip setProperty
 
 foreign import _setProperty :: forall o v. Fn3 String o v o
 
-
 -- | Defines a new readonly property. Useful for e.g. `name` which is a readonly prop
 defineProperty :: forall o v. String -> o -> v -> o
 defineProperty = runFn3 _defineProperty
 
-infix 9 defineProperty' as !=
+infixl 9 defineProperty' as !=
 
 defineProperty' :: forall o v. o -> String -> v -> o
 defineProperty' = flip defineProperty
 
 foreign import _defineProperty :: forall o v. Fn3 String o v o
 
--- | Attempt to cast to a type given a constructor for it
-downcast :: forall ctor from to. ctor -> from -> Maybe to
-downcast ctor from =
-  if from `instanceOf` ctor
-  then Just (unsafeCoerce from)
-  else Nothing
+removeProperty :: forall o. String -> o -> o
+removeProperty = runFn2 _removeProperty
+
+infixl 9 removeProperty' as !-
+
+removeProperty' :: forall o. o -> String -> o
+removeProperty' = flip removeProperty
+
+foreign import _removeProperty :: forall o. Fn2 String o o
 
