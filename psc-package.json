@@ -3,14 +3,15 @@
   "set": "master",
   "source": "https://github.com/purescript/package-sets", 
   "depends":
-    [ "functions"
-    , "effect"
-    , "nullable"
-    , "maybe"
-    , "prelude"
-    , "unsafe-coerce"
-    , "psci-support"
-    , "refs"
-    , "spec"
-    , "unsafe-reference" ]
+  [ "effect"
+  , "foldable-traversable"
+  , "functions"
+  , "maybe"
+  , "nullable"
+  , "prelude"
+  , "psci-support"
+  , "refs"
+  , "spec"
+  , "unsafe-coerce"
+  , "unsafe-reference" ]
 }
