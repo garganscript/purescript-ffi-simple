@@ -6,6 +6,7 @@
     [ "functions"
     , "effect"
     , "nullable"
+    , "maybe"
     , "prelude"
     , "unsafe-coerce"
     , "psci-support"
