@@ -6,14 +6,13 @@ module FFI.Simple.Functions
   , args6, args7, args8, args9, args10
   ) where
 
-import Prelude ( Unit, ($), unit, flip, pure )
+import Prelude ( class Monad, bind, flip, pure, (<<<) )
 import FFI.Simple.Objects ( getProperty )
 import FFI.Simple.PseudoArray ( PseudoArray )
 import Data.Function.Uncurried
   ( Fn2, runFn2, Fn3, runFn3, Fn4,  runFn4
   , Fn5, runFn5, Fn6, runFn6, Fn7,  runFn7
   , Fn8, runFn8, Fn9, runFn9, Fn10, runFn10 )
-import Effect ( Effect )
 
 -- | Call new on the function with an array or pseudoarray of arguments
 new :: forall f a o. f -> a -> o
@@ -44,11 +43,41 @@ applyMethod n o = applyTo (getProperty n o) o
 applyMethod' :: forall o a b. o -> String -> a -> b
 applyMethod' = flip applyMethod
 
--- | Gives you back an `Effect a` with delayed computation
-delay :: forall a b. a -> (a -> Effect b) -> Effect b
-delay = runFn2 _delay
-
-foreign import _delay :: forall a b. Fn2 a (a -> Effect b) (Effect b)
+-- | `delay a m` is a delayed version of `m a`.
+-- The pure computation of `m` becomes part of the effect.
+-- For instance:
+-- ```
+-- test1 a m = do
+--   let eff = delay a m
+--   eff1
+--   eff
+--   eff2
+--   eff
+--
+-- test2 a m = do
+--   let eff = m a
+--   eff1
+--   eff
+--   eff2
+--   eff
+-- ```
+--
+-- In `test1`, `m` is applied twice to `a`, after `eff1` and after `eff2`.
+-- In `test2`, `m` is applied only once before `eff1`; yet the resulting effect
+-- fires twice, after `eff1` and after `eff2`.
+--
+-- This is useful in two cases:
+-- * The computation (not the effect) is expensive and one wants to perform it
+--   if the effect needs to be done.
+-- * The computation is impure and thus one wants to control its effect.
+--
+-- `delay a m` is equivalent to:
+-- ```
+-- do a' <- pure a
+--    m a'
+-- ```
+delay :: forall a b m. Monad m => a -> (a -> m b) -> m b
+delay = bind <<< pure
 
 -- | returns an argument as a PseudoArray
 args1 :: forall a. a -> PseudoArray

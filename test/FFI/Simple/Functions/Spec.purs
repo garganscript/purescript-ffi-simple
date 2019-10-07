@@ -1,11 +1,13 @@
 module FFI.Simple.Functions.Spec ( functionsSpec ) where
 
-import Prelude ( Unit, bind, discard, unit, (#), ($) )
+import Prelude ( Unit, pure, bind, discard, unit, (#), ($) )
 import Data.Nullable ( null )
+import Effect ( Effect )
 import Effect.Class ( liftEffect )
 import Effect.Ref as Ref
 import Test.Spec ( Spec, describe, it )
 import Test.Spec.Assertions ( shouldEqual )
+import Unsafe.Coerce ( unsafeCoerce )
 
 import FFI.Simple.PseudoArray ( length )
 import FFI.Simple.Functions
@@ -14,6 +16,10 @@ import FFI.Simple.Objects (instanceOf)
 foreign import data Object :: Type
 foreign import _object :: Object
 foreign import _string :: Object
+
+unsafeWriteRef :: forall a. a -> Ref.Ref a -> Effect Unit
+unsafeWriteRef v ref =
+  pure (unsafeCoerce (Ref.write v ref) unit)
 
 functionsSpec :: Spec Unit
 functionsSpec = describe "Functions" $ do
@@ -35,12 +41,15 @@ functionsSpec = describe "Functions" $ do
     ({val: 123, sum: summer} ... "sum" $ [1,2]) `shouldEqual` 126
   it "delay" $ do
     ref <- liftEffect $ Ref.new 0
-    let eff = delay unit $ \_ -> Ref.write 1 ref
-    count <- liftEffect $ Ref.read ref
-    count `shouldEqual` 0
-    ret <- liftEffect eff
-    count' <- liftEffect $ Ref.read ref
-    count' `shouldEqual` 1
+    let eff2 = delay unit (\_ -> unsafeWriteRef 2 ref)
+    count0 <- liftEffect $ Ref.read ref
+    count0 `shouldEqual` 0 -- eff2 is delayed
+    let eff1 = unsafeWriteRef 1 ref
+    count1 <- liftEffect $ Ref.read ref
+    count1 `shouldEqual` 1 -- eff1 was not delayed
+    ret <- liftEffect eff2
+    count2 <- liftEffect $ Ref.read ref
+    count2 `shouldEqual` 2 -- eff2 was effective
   it "args1" $ length (args1 "") `shouldEqual` 1
   it "args2" $ length (args2 "" 1) `shouldEqual` 2
   it "args3" $ length (args3 "" 1 "") `shouldEqual` 3
