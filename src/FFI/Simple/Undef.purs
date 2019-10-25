@@ -1,15 +1,12 @@
 -- Utilities for handling unwanted undefs when you are lying about
 -- their existence in the types
 module FFI.Simple.Undef
-  ( Undef, undef
-  , isUndef
-  , defaultUndef, nullUndef, maybeUndef
+  ( Undef, undef, isUndef, defaultUndef, nullUndef, maybeUndef
   ) where
 
-import Prelude ( (<<<), (==) )
-import Data.Maybe ( Maybe )
-import Data.Nullable ( Nullable, null, toMaybe )
-import Unsafe.Coerce ( unsafeCoerce )
+import Prelude ((<<<))
+import Data.Maybe (Maybe)
+import Data.Nullable (Nullable, toMaybe)
 
 foreign import data Undef :: Type
 

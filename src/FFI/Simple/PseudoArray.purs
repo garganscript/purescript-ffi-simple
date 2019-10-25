@@ -3,9 +3,8 @@ module FFI.Simple.PseudoArray
   ( PseudoArray, length, from, drop, slice, unshift
   ) where
 
-import Data.Unit ( Unit )
-import FFI.Simple.Objects ( getProperty )
-import Data.Function.Uncurried ( Fn2, runFn2, Fn3, runFn3 )
+import FFI.Simple.Objects (getProperty)
+import Data.Function.Uncurried (Fn2, runFn2, Fn3, runFn3)
 
 foreign import data PseudoArray :: Type
 
@@ -32,7 +31,7 @@ slice = runFn3 _slice
 
 foreign import _slice :: forall a b. Fn3 Int Int a (Array b)
 
-unshift :: forall a b c. a -> Array b -> Array b
+unshift :: forall a b. a -> Array b -> Array b
 unshift = runFn2 _unshift
 
 foreign import _unshift :: forall a b. Fn2 a (Array b) (Array b)

@@ -1,5 +1,6 @@
 module Test.Main where
 
+import Prelude (pure)
 import Data.Unit ( Unit )
 import Data.Traversable ( sequence_ )
 import Effect ( Effect )
