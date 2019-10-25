@@ -33,6 +33,20 @@ createElement c p cs = applyTo react (args3 c p cs)
 
 ## Changelog
 
+### 0.2.5
+
+* `F.S.Functions`:
+  * `delay` now uses a closed typeclass to select for Effect
+* Brought all the deps used for build and test up to date
+
+### 0.2.4
+
+* `F.S.Objects`:
+  * `keys`
+  * `removeProperty` (`(!-)`, infix 9, probably wrong, please suggest a better value)
+  * Made `(.=)` infix 9. This is probably still wrong, please suggest a better value.
+  * Made `(!=)` infix 9. This is probably still wrong, please suggest a better value.
+
 ### 0.2.3
 
 Improvements:
@@ -41,6 +55,8 @@ Improvements:
   * Made `global` check not just `window`, but also `globalThis`,
     `global`, so supporting any environment. But nodejs is shit, so
     it's basically useless in that environment.
+* `F.S.Objects`:
+  * `downcast`
 * Improved tests for existing functionality
 
 New:

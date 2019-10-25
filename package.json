@@ -1,6 +1,6 @@
 {
   "name": "purescript-ffi-simple",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "We're sure you have your reasons",
   "scripts": {
     "build": "pulp --psc-package build",
