@@ -1,7 +1,7 @@
 {
   "name": "ffi-simple",
-  "set": "master",
-  "source": "https://github.com/purescript/package-sets", 
+  "set": "local",
+  "source": ".psc-package",
   "depends":
   [ "effect"
   , "foldable-traversable"
