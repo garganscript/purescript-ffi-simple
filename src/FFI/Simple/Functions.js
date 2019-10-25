@@ -12,7 +12,6 @@ exports._args7 = args;
 exports._args8 = args;
 exports._args9 = args;
 exports._args10 = args;
-
 exports._bind = function bind(f, obj) { return f.bind(obj); };
 exports._apply = function apply(f, that, args) { return f.apply(that, args); };
 exports._new = function newer(obj, args) {
@@ -21,3 +20,6 @@ exports._new = function newer(obj, args) {
   // We could obj.bind.apply(obj, args) but obj may have overwritten `.bind`
   return new (Function.prototype.bind.apply(obj, args2));
 }
+exports._delay = function delay(a, f) {
+  return function() { return f()(a); };
+};

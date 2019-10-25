@@ -1,12 +1,13 @@
 -- | Utilities for dealing with (uncurried) functions
 module FFI.Simple.Functions
-  ( new, bindTo, applyTo, delay
+  ( class Delay, delay, new, bindTo, applyTo
   , (...), applyMethod, applyMethod'
   , args1, args2, args3, args4, args5
   , args6, args7, args8, args9, args10
   ) where
 
 import Prelude ( class Monad, bind, flip, pure, (<<<) )
+import Effect (Effect)
 import FFI.Simple.Objects ( getProperty )
 import FFI.Simple.PseudoArray ( PseudoArray )
 import Data.Function.Uncurried
@@ -76,8 +77,16 @@ applyMethod' = flip applyMethod
 -- do a' <- pure a
 --    m a'
 -- ```
-delay :: forall a b m. Monad m => a -> (a -> m b) -> m b
-delay = bind <<< pure
+class Monad m <= Delay m where
+  delay :: forall a b. a -> (a -> m b) -> m b
+
+instance delayEffect :: Delay Effect where
+  delay = runFn2 _delay
+
+else instance delayMonad :: Monad m => Delay m where
+  delay = bind <<< pure
+
+foreign import _delay :: forall a b. Fn2 a (a -> Effect b) (Effect b)
 
 -- | returns an argument as a PseudoArray
 args1 :: forall a. a -> PseudoArray
