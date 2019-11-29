@@ -20,6 +20,3 @@ exports._new = function newer(obj, args) {
   // We could obj.bind.apply(obj, args) but obj may have overwritten `.bind`
   return new (Function.prototype.bind.apply(obj, args2));
 }
-exports._delay = function delay(a, f) {
-  return function() { return f()(a); };
-};

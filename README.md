@@ -33,11 +33,18 @@ createElement c p cs = applyTo react (args3 c p cs)
 
 ## Changelog
 
+### 0.2.6
+ 
+* `F.S.Functions`:
+  * `delay` no longer selects for effect with a closed typeclass
+* Upgraded build to 
+
 ### 0.2.5
 
 * `F.S.Functions`:
   * `delay` now uses a closed typeclass to select for Effect
 * Brought all the deps used for build and test up to date
+* Fixed warnings
 
 ### 0.2.4
 

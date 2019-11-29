@@ -7,7 +7,6 @@ module FFI.Simple.Functions
   ) where
 
 import Prelude ( class Monad, bind, flip, pure, (<<<) )
-import Effect (Effect)
 import FFI.Simple.Objects ( getProperty )
 import FFI.Simple.PseudoArray ( PseudoArray )
 import Data.Function.Uncurried
@@ -80,13 +79,8 @@ applyMethod' = flip applyMethod
 class Monad m <= Delay m where
   delay :: forall a b. a -> (a -> m b) -> m b
 
-instance delayEffect :: Delay Effect where
-  delay = runFn2 _delay
-
-else instance delayMonad :: Monad m => Delay m where
+instance delayMonad :: Monad m => Delay m where
   delay = bind <<< pure
-
-foreign import _delay :: forall a b. Fn2 a (a -> Effect b) (Effect b)
 
 -- | returns an argument as a PseudoArray
 args1 :: forall a. a -> PseudoArray
