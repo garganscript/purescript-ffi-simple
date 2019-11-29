@@ -37,7 +37,7 @@ createElement c p cs = applyTo react (args3 c p cs)
  
 * `F.S.Functions`:
   * `delay` no longer selects for effect with a closed typeclass
-* Upgraded build to 
+* Upgraded build to purescript 0.3.5
 
 ### 0.2.5
 
