@@ -1,6 +1,6 @@
 {
   "name": "purescript-ffi-simple",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "We're sure you have your reasons",
   "scripts": {
     "build": "pulp --psc-package build",
@@ -13,9 +13,9 @@
   "author": "James Laver",
   "license": "MPL-2.0",
   "devDependencies": {
-    "psc-package": "^3.0.1",
-    "pulp": "^13.0.0",
-    "purescript": "^0.13.5",
+    "psc-package": "^4.0.1",
+    "pulp": "^14.0.0",
+    "purescript": "^0.13.8",
     "spago": "^0.10.0"
   },
   "dependencies": {}
