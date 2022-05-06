@@ -1,5 +1,6 @@
 'use strict';
-exports._from = function(a) { return Array.from(a); };
-exports._drop = function(i,a) { return Array.prototype.slice.call(a, i); };
-exports._slice = function(i,j,a) { return Array.prototype.slice.call(a, i, j); };
-exports._unshift = function(i,a) { a.unshift(i); return a; };
+
+export function _from(a) { return Array.from(a); };
+export function _drop(i,a) { return Array.prototype.slice.call(a, i); };
+export function _slice(i,j,a) { return Array.prototype.slice.call(a, i, j); };
+export function _unshift(i,a) { a.unshift(i); return a; };

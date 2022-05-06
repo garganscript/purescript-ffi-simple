@@ -1,3 +1,4 @@
 'use strict';
-exports._object = Object;
-exports._string = String;
+
+export _object = Object;
+export _string = String;

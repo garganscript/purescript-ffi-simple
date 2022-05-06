@@ -2,19 +2,19 @@
 
 function args() { return arguments; }
 
-exports._args1 = args;
-exports._args2 = args;
-exports._args3 = args;
-exports._args4 = args;
-exports._args5 = args;
-exports._args6 = args;
-exports._args7 = args;
-exports._args8 = args;
-exports._args9 = args;
-exports._args10 = args;
-exports._bind = function bind(f, obj) { return f.bind(obj); };
-exports._apply = function apply(f, that, args) { return f.apply(that, args); };
-exports._new = function newer(obj, args) {
+export function _args1() { return arguments; }
+export function _args2() { return arguments; }
+export function _args3() { return arguments; }
+export function _args4() { return arguments; }
+export function _args5() { return arguments; }
+export function _args6() { return arguments; }
+export function _args7() { return arguments; }
+export function _args8() { return arguments; }
+export function _args9() { return arguments; }
+export function _args10() { return arguments; }
+export function _bind(f, obj) { return f.bind(obj); };
+export function _apply(f, that, args) { return f.apply(that, args); };
+export function _new(obj, args) {
   const args2 = args.slice();
   args2.unshift(obj);
   // We could obj.bind.apply(obj, args) but obj may have overwritten `.bind`

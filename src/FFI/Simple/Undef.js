@@ -1,5 +1,5 @@
 'use strict';
 
-exports._undef = undefined;
-exports._isUndef = function isUndefined(v) { return (typeof v === 'undefined'); };
-exports._nullUndef = function nullUndef(v) { return (typeof v === 'undefined') ? null : v; };
+export const _undef = undefined;
+export function _isUndef(v) { return (typeof v === 'undefined'); };
+export function _nullUndef(v) { return (typeof v === 'undefined') ? null : v; };

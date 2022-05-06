@@ -1,2 +1,3 @@
 'use strict';
-exports._object = Object;
+
+export _object = Object;
