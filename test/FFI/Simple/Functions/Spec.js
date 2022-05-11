@@ -7,5 +7,5 @@ export function sum() {
 export function summer() {
   return Array.prototype.reduce.call(arguments, function(a,b) { return a + b; }, this.val);    
 }
-export _object = Object;
-export _string = String;
+export let _object = Object;
+export let _string = String;

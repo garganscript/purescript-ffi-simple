@@ -1,4 +1,4 @@
 'use strict';
 
-export _object = Object;
-export _string = String;
+export let _object = Object;
+export let _string = String;

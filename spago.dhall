@@ -8,7 +8,6 @@
   , "maybe"
   , "nullable"
   , "prelude"
-  , "psci-support"
   , "refs"
   , "spec"
   , "tuples"
