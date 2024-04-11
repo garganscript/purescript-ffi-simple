@@ -1,0 +1,18 @@
+package:
+  name: ffi-simple
+  dependencies:
+    - functions
+    - maybe
+    - nullable
+    - prelude
+    - unsafe-coerce
+  test:
+    main: Test.Main
+    dependencies:
+      - refs
+      - spec
+      - unsafe-reference
+workspace:
+  packageSet:
+    registry: 50.7.0
+  extraPackages: {}

@@ -1,24 +1,16 @@
 {
   "name": "purescript-ffi-simple",
-  "version": "0.2.10",
+  "version": "0.5.0",
   "description": "We're sure you have your reasons",
   "scripts": {
-    "build": "pulp --psc-package build",
-    "rebase-set": "spago upgrade-set && spago psc-package-insdhall",
-    "rebuild-set": "spago psc-package-insdhall",
-    "install-ps": "psc-package install",
-    "repl": "pulp --psc-package repl",
-    "test": "pulp test"
+    "build": "spago build"
   },
   "author": "James Laver",
   "license": "MPL-2.0",
   "devDependencies": {
-    "psc-package": "^4.0.1",
-    "pulp": "^16.0.1",
-    "purescript": "^0.15.0",
-    "spago": "^0.20.9"
+    "purescript": "^0.15.15"
   },
   "dependencies": {
-    "purs": "^0.3.0"
+    "spago": "^0.93.29"
   }
 }
