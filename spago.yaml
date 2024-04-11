@@ -2,6 +2,12 @@ workspace:
   packageSet:
     registry: 50.7.0
   extraPackages: {}
+  # Optional setting to enable the "lockfile". Enabling it will generate
+  # a `spago.lock` file with a cache of the build plan.
+  # It's disabled by default when using package sets (because we already
+  # get a stable build plan from there) and enabled by default when using
+  # the Registry solver.
+  # See "The lock file" section for more details.  lock: false
 
 package:
   name: ffi-simple
@@ -17,7 +23,7 @@ package:
       - refs
       - spec
       - unsafe-reference
-
+ 
   # Optional section for configuring the `spago publish` command.
   # If you intend to publish your package, this section becomes mandatory.
   publish:
