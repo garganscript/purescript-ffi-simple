@@ -36,8 +36,8 @@ package:
     # Optional list of globs to include in the published archive, in
     # addition to the list of files that the Registry includes by default:
     # https://github.com/purescript/registry-dev/blob/master/SPEC.md#always-included-files
-    include:
-    - "test/**/*.purs"
+    #include:
+    #- "test/**/*.purs"
     # Optional list of globs to exclude from the published archive, in
     # addition to the list of files that the Registry includes by default:
     # https://github.com/purescript/registry-dev/blob/master/SPEC.md#always-excluded-files
