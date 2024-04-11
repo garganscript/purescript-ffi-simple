@@ -1,18 +1,48 @@
+workspace:
+  packageSet:
+    registry: 50.7.0
+  extraPackages: {}
+
 package:
   name: ffi-simple
   dependencies:
-    - functions
-    - maybe
-    - nullable
-    - prelude
-    - unsafe-coerce
+    - functions: ">=6.0.0 <7.0.0"
+    - maybe: ">=6.0.0 <7.0.0"
+    - nullable: ">=6.0.0 <7.0.0"
+    - prelude: ">=6.0.1 <7.0.0"
+    - unsafe-coerce: ">=6.0.0 <7.0.0"
   test:
     main: Test.Main
     dependencies:
       - refs
       - spec
       - unsafe-reference
-workspace:
-  packageSet:
-    registry: 50.7.0
-  extraPackages: {}
+
+  # Optional section for configuring the `spago publish` command.
+  # If you intend to publish your package, this section becomes mandatory.
+  publish:
+    # The version of your package. This follows semver rules, but with no
+    # prereleases - so only major.minor.patch.
+    version: 0.5.0
+    # The license for your source, in SPDX format: https://spdx.dev/
+    license: MPL-2.0
+    # Optional list of globs to include in the published archive, in
+    # addition to the list of files that the Registry includes by default:
+    # https://github.com/purescript/registry-dev/blob/master/SPEC.md#always-included-files
+    include:
+    - "test/**/*.purs"
+    # Optional list of globs to exclude from the published archive, in
+    # addition to the list of files that the Registry includes by default:
+    # https://github.com/purescript/registry-dev/blob/master/SPEC.md#always-excluded-files
+    # Note that the Registry will first apply the `include` list, then
+    # the `exclude` one, as detailed in the specification:
+    # https://github.com/purescript/registry-dev/blob/master/SPEC.md#33-manifest
+    exclude:
+    - "test/graphs/**/*"
+    # The place where the Registry will fetch the source from.
+    # This is optional since you might want to release the code without
+    # publishing to the Registry, which is what this is needed for.
+    location:
+      githubOwner: garganscript
+      githubRepo: purescript-ffi-simple
+
