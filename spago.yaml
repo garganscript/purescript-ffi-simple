@@ -30,7 +30,7 @@ package:
   publish:
     # The version of your package. This follows semver rules, but with no
     # prereleases - so only major.minor.patch.
-    version: 0.5.0
+    version: 0.5.1
     # The license for your source, in SPDX format: https://spdx.dev/
     license: MPL-2.0
     # Optional list of globs to include in the published archive, in
