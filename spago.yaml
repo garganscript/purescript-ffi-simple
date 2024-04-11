@@ -7,7 +7,8 @@ workspace:
   # It's disabled by default when using package sets (because we already
   # get a stable build plan from there) and enabled by default when using
   # the Registry solver.
-  # See "The lock file" section for more details.  lock: false
+  # See "The lock file" section for more details.
+  lock: false
 
 package:
   name: ffi-simple
